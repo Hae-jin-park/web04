@@ -1,1 +1,3 @@
 JDBC -> mybatis 도입 시작
+
+mybatis mapping xml 작업 완료
