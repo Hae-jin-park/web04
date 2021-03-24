@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>web04</display-name>
+  <context-param>
+    <param-name>ctxConfigLocation</param-name>
+    <param-value>/WEB-INF/application-context.properties</param-value>
+  </context-param>
+  <resource-ref>
+    <res-ref-name>jdbc/wftm</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+  <context-param>
+    <param-name>driver</param-name>
+    <param-value>org.gjt.mm.mysql.Driver</param-value>
+  </context-param>
+  <context-param>
+    <param-name>url</param-name>
+    <param-value>jdbc:mysql://192.168.0.10:3306/ftm_db_user</param-value>
+  </context-param>
+  <context-param>
+    <param-name>username</param-name>
+    <param-value>ftm_project</param-value>
+  </context-param>
+  <context-param>
+    <param-name>password</param-name>
+    <param-value>cj0503</param-value>
+  </context-param>
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>com.study.filters.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>AntiXSS</filter-name>
+    <filter-class>com.study.filters.XSSFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AntiXSS</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <security-constraint>
+  <display-name>JSP Protection</display-name>
+  <web-resource-collection>
+    <web-resource-name>SecureJSPPages</web-resource-name>
+    <url-pattern>*.jsp</url-pattern>
+  </web-resource-collection>
+  <auth-constraint>
+    <role-name>nobody</role-name>
+  </auth-constraint>
+</security-constraint>
+ 
+
+<security-role>
+	<description>
+		Nobody should be in this role so JSP files or Servlet Mapped are protected
+		from direct access.
+	</description>
+	<role-name>nobody</role-name>
+</security-role>
+
+<!--  출처: https://qmffjem09.tistory.com/entry/URL-직접-접근-모두-막기 [새로운 도전을 위한 한걸음]-->
+</web-app>
