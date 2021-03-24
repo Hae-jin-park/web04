@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.study.dao.RunListDAO">
+  	<resultMap type="RunListVO" id="RunListVOMap">
+  		<id property="t_no" column="t_no"/>
+  		<result property="t_date" column="t_date"/>
+  		<result property="car_no" column="car_no"/>
+  		<result property="car_div" column="car_div"/>
+  		<result property="t_from" column="t_from"/>
+  		<result property="t_to" column="t_to"/>
+  		<result property="fee" column="fee"/>
+  		<result property="bill" column="bill"/>
+  		<result property="measure_fee" column="measure_fee"/>
+  		<result property="commission" column="commission"/>
+  		<result property="detail" column="detail"/>
+  		<result property="client_code" column="client_code"/>
+  	</resultMap>
+  	<resultMap type="ClientVO" id="Clients">
+  		<id property="client_code" column="client_code"/>
+  		<result property="client_name" column="client_name"/>
+  		<result property="client_detail" column="client_detail"/>
+  		<result property="client_use" column="client_use"/>
+  	</resultMap>
+  	
+  	<select id="selectList" resultMap="RunListVOMap">
+		SELECT *
+		FROM run_list
+		ORDER BY t_no ASC
+	</select>
+	
+  	<select id="selectOne" parameterType="int" resultMap="RunListVOMap">
+		SELECT *
+		FROM run_list
+		ORDER BY t_no ASC WHERE t_no=#{t_no}
+	</select>
+	
+	<insert id="insert" parameterType="runListVO">
+		INSERT INTO run_list (t_date,car_no,car_div,t_from,t_to,fee,bill,measure_fee,commission,detail,client_code)
+		VALUES(#{t_date},#{car_no},#{car_div},#{t_from},#{t_to},#{fee},#{bill},#{measure_fee},#{commission},#{detail},#{client_code})
+	</insert>
+	
+  	<update id="update" parameterType="runListVO">
+		UPDATE run_list
+		SET t_date = #{t_date},	car_no = #{car_no}, car_div=#{car_div}, t_from = #{t_from},
+		t_to = #{t_to},	fee = #{fee}, bill = #{bill}, measure_fee = #{measure_fee}, commission = #{commission},	detail = #{detail},  client_code = #{client_code}
+		WHERE t_no = #{t_no}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM run_list WHERE t_no=#{t_no}
+	</delete>
+  </mapper>

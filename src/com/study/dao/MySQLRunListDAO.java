@@ -17,65 +17,62 @@ import com.study.vo.RunListVO;
 @Component("runlistDAO")
 public class MySQLRunListDAO implements RunListDAO {
 	SqlSessionFactory sqlSessionFactory;
-	//Connection con;
-	private DataSource dsrc;
-	private Connection con;
-	private Statement st = null;
-	private ResultSet rs = null;
-	private PreparedStatement pst = null;
-	
+	//Connection con;	
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory=sqlSessionFactory;
 	}
-	public void setDataSource(DataSource dsrc) {
-		this.dsrc = dsrc;
-	}
+
+	@Override
 	public List<RunListVO> selectList() throws Exception{
 		SqlSession sqlSession=sqlSessionFactory.openSession();
 		try {
-			return sqlSession.selectList("com.study.dao.MySQLRunListDAO.selectList");
+			return sqlSession.selectList("com.study.dao.RunListDAO.selectList");
 		}finally {
 			sqlSession.close();
 		}
 	}
-	
+
+	@Override
 	public int insert(RunListVO vo) throws Exception{
 		SqlSession sqlSession=sqlSessionFactory.openSession();
 		try {
-			int count = sqlSession.insert("com.study.dao.MySQLRunListDAO.insert");
+			int count = sqlSession.insert("com.study.dao.RunListDAO.insert");
 			sqlSession.commit();
 			return count;
 		}finally {
 			sqlSession.close();
 		}
 	}
-	
+
+	@Override
 	public int delete(int t_no) throws Exception{
 		SqlSession sqlSession=sqlSessionFactory.openSession();
 		try {	
-			int count = sqlSession.delete("com.study.dao.MySQLRunListDAO.delete",t_no);
+			int count = sqlSession.delete("com.study.dao.RunListDAO.delete",t_no);
 			sqlSession.commit();
 			return count;
 		}finally {
 			sqlSession.close();
 		}
 	}
-	
+
+	@Override
 	public int update(RunListVO vo) throws Exception{
 		SqlSession sqlSession=sqlSessionFactory.openSession();
 		try {	
-			int count = sqlSession.update("com.study.dao.MySQLRunListDAO.update",vo);
+			int count = sqlSession.update("com.study.dao.RunListDAO.update",vo);
 			sqlSession.commit();
 			return count;
 		}finally {
 			sqlSession.close();
 		}
 	}
-	
+
+	@Override
 	public RunListVO selectOne(int t_no) throws Exception{
 		SqlSession sqlSession=sqlSessionFactory.openSession();
 		try {	
-			return sqlSession.selectOne("com.study.dao.MySQLRunListDAO.selectOne",t_no);
+			return sqlSession.selectOne("com.study.dao.RunListDAO.selectOne",t_no);
 		}finally {
 			sqlSession.close();
 		}
@@ -85,7 +82,7 @@ public class MySQLRunListDAO implements RunListDAO {
 	public List<RunListVO> listPageV2(Criteria crit) throws Exception {
 		SqlSession sqlSession=sqlSessionFactory.openSession();
 		try {
-			return sqlSession.selectList("com.study.dao.MySQLRunListDAO.listPageV2",crit);
+			return sqlSession.selectList("com.study.dao.RunListDAO.listPageV2",crit);
 		}finally {
 			sqlSession.close();
 		}
@@ -95,7 +92,7 @@ public class MySQLRunListDAO implements RunListDAO {
 	public int listTotalCount() throws Exception {
 		SqlSession sqlSession=sqlSessionFactory.openSession();
 		try {	
-			return sqlSession.selectOne("com.study.dao.MySQLRunListDAO.listTotalCount");
+			return sqlSession.selectOne("com.study.dao.RunListDAO.listTotalCount");
 		}finally {
 			sqlSession.close();
 		}

@@ -26,7 +26,6 @@ public class RunListVO implements Serializable {
 	private String car_no;
 	private String car_div;
 	private int client_code;
-	private ClientVO clients;
 	private String t_from;
 	private String t_to;
 	private int fee;
@@ -105,13 +104,6 @@ public class RunListVO implements Serializable {
 		this.detail = detail;
 		return this;
 	}
-	public ClientVO getClients() {
-		return clients;
-	}
-	public RunListVO setClients(ClientVO clients) {
-		this.clients = clients;
-		return this;
-	}
 	public int getBill() {
 		return bill;
 	}
@@ -123,7 +115,7 @@ public class RunListVO implements Serializable {
 	public String toString() {
 		return "RunListVO [t_date=" + t_date + ", car_no=" + car_no + ", client_code=" + client_code
 				+ ", t_from=" + t_from + ", t_to=" + t_to + ", fee=" + fee + ", measure_fee=" + measure_fee
-				+ ", commission=" + commission + ", detail=" + detail + ", clients=" + clients + "]";
+				+ ", commission=" + commission + ", detail=" + detail + "]";
 	}
 	public int getT_no() {
 		return t_no;
