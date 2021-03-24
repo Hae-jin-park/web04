@@ -9,9 +9,8 @@ public interface RunListDAO {
 	public List<RunListVO> selectList() throws Exception;
 	public int insert(RunListVO vo) throws Exception;
 	public int delete(int t_no) throws Exception;
-	public int update(RunListVO vo, int t_no) throws Exception;
+	public int update(RunListVO vo) throws Exception;
 	public RunListVO selectOne(int t_no) throws Exception;
-	public List<RunListVO> listPage(int p) throws Exception;
-	public List<RunListVO> listPageByCrit(Criteria crit) throws Exception;
+	public List<RunListVO> listPageV2(Criteria crit) throws Exception;
 	public int listTotalCount() throws Exception;
 }
