@@ -91,43 +91,52 @@ for(RunListVO vo : runlist){
                         <table class="table table-sm table-hover">
 <thead>
 <tr>
-<th>일자</th>
-<th>차번</th>
-<th>상차지</th>
-<th>하역지</th>
-<th>운송료</th>
-<th>거래처청구</th>
-<th>상세조회</th>
-<th>삭제?</th>
-
+	<th><c:choose>
+			<c:when test="${orderByCond eq 'TDATE_ASC' }">
+				<a href="listV2.do?orderByCond=TDATE_DESC">일자↑</a>
+			</c:when>
+			<c:when test="${orderByCond eq 'TDATE_DESC' }">
+				<a href="listV2.do?orderByCond=TDATE_ASC">일자↓</a>
+			</c:when>
+			<c:otherwise>
+				<a href="listV2.do?orderByCond=TDATE_ASC">일자</a>
+			</c:otherwise>
+		</c:choose></th>
+	<th>차번</th>
+	<th>상차지</th>
+	<th>하역지</th>
+	<th>운송료</th>
+	<th>거래처청구</th>
+	<th>상세조회</th>
+	<th>삭제?</th>
 </tr>
 <tbody>
 <c:forEach var="runlist" items="${runlist }">
-<tr id="mainTbl">
-<td>${runlist.t_date }</td> 
-<td>${runlist.car_no }</td> 
-<td>${runlist.t_from }</td>
-<td>${runlist.t_to }</td>
-<td><fmt:formatNumber value='${runlist.fee }' groupingUsed="true"/></td> 
-<td><fmt:formatNumber value='${runlist.bill }' groupingUsed="true"/></td>
-<td><a class="btn btn-warning" href="update.do?t_no=${runlist.t_no }">상세조회</a>
-<c:choose>
-	<c:when test="${isInternal eq true && auth_level eq 'ADMIN'}">
-		<td><a class="btn btn-danger" href="delete.do?t_no=${runlist.t_no }" onclick="return confirm('정말 삭제할까요?')">[삭제]</a></td>
-	</c:when>
-	<c:otherwise>
-	<style>
-		.isDisabled {
-	  color: currentColor;
-	  cursor: not-allowed;
-	  opacity: 0.5;
-	  text-decoration: none;
-	}
-	</style>
-		<td><a class="btn btn-danger disabled">삭제 불가</a></td>
-	</c:otherwise>
-</c:choose>
-</tr>
+	<tr id="mainTbl">
+		<td>${runlist.t_date }</td> 
+		<td>${runlist.car_no }</td> 
+		<td>${runlist.t_from }</td>
+		<td>${runlist.t_to }</td>
+		<td><fmt:formatNumber value='${runlist.fee }' groupingUsed="true"/></td> 
+		<td><fmt:formatNumber value='${runlist.bill }' groupingUsed="true"/></td>
+		<td><a class="btn btn-warning" href="update.do?t_no=${runlist.t_no }">상세조회</a>
+		<c:choose>
+			<c:when test="${isInternal eq true && auth_level eq 'ADMIN'}">
+				<td><a class="btn btn-danger" href="delete.do?t_no=${runlist.t_no }" onclick="return confirm('정말 삭제할까요?')">[삭제]</a></td>
+			</c:when>
+			<c:otherwise>
+			<style>
+				.isDisabled {
+			  color: currentColor;
+			  cursor: not-allowed;
+			  opacity: 0.5;
+			  text-decoration: none;
+			}
+			</style>
+				<td><a class="btn btn-danger disabled">삭제 불가</a></td>
+			</c:otherwise>
+		</c:choose>
+	</tr>
 </c:forEach>
 </tbody>
 </table>
@@ -138,6 +147,7 @@ for(RunListVO vo : runlist){
                 <form id="pageInfoStash">
                 	<input type="hidden" name="page" value=${pageMaker.cri.page }>
                 	<input type="hidden" name="perPageNum" value=${pageMaker.cri.perPageNum }>
+                	<input type="hidden" name="orderByCond" value=${orderByCond }>
                 </form>
                 
                 <div class="text-center">

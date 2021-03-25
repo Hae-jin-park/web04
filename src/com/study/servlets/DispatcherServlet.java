@@ -48,6 +48,10 @@ public class DispatcherServlet extends HttpServlet {
 					crit.setPerPageNum(Integer.parseInt(request.getParameter("perPageNum")));
 				}
 				
+				if(request.getParameter("orderByCond")!=null) {
+					model.put("orderByCond", request.getParameter("orderByCond"));
+				}
+				
 				if(request.getParameter("t_no")!=null) {
 					model.put("t_no",Integer.parseInt(request.getParameter("t_no")));
 				}

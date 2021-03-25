@@ -3,6 +3,7 @@ package com.study.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -79,10 +80,10 @@ public class MySQLRunListDAO implements RunListDAO {
 	}
 	
 	@Override
-	public List<RunListVO> listPageV2(Criteria crit) throws Exception {
+	public List<RunListVO> listPageV2(Map<String, Object> paramMap) throws Exception {
 		SqlSession sqlSession=sqlSessionFactory.openSession();
 		try {
-			return sqlSession.selectList("com.study.dao.RunListDAO.listPageV2",crit);
+			return sqlSession.selectList("com.study.dao.RunListDAO.listPageV2",paramMap);
 		}finally {
 			sqlSession.close();
 		}
