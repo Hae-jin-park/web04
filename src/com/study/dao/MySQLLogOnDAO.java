@@ -3,7 +3,13 @@ package com.study.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.study.annotation.Component;
 import com.study.util.ResourceManage;
@@ -11,33 +17,20 @@ import com.study.vo.MemberVO;
 
 @Component("logonDAO")
 public class MySQLLogOnDAO implements LogOnDAO {
-	private DataSource dsrc;
-	private Connection con;
-	private ResultSet rs = null;
-	private PreparedStatement pst = null;
-	public void setDataSource(DataSource dsrc) {
-		this.dsrc = dsrc;
+	SqlSessionFactory sqlSessionFactory;
+	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+		this.sqlSessionFactory=sqlSessionFactory;
 	}
 	public MemberVO exist(String id, String password) throws Exception{
+		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			con = dsrc.getConnection();
-			pst = con.prepareStatement("SELECT * FROM member WHERE id=? AND password=?");
-			pst.setString(1, id);
-			pst.setString(2, password);
-			rs=pst.executeQuery();
-			if(rs.next()) {
-				return new MemberVO().setId(rs.getString("id"))
-						.setName(rs.getString("name"))
-						.setPassword(rs.getString("password"))
-						.setEmail(rs.getString("email"))
-						.setAuthority(rs.getString("authority"));
-			}else {
-				return null;
-			}
-		}catch(Exception e) {
-			throw e;
+			Map<String, Object> params=new HashMap<>();
+			params.put("id", id);
+			params.put("password", password);
+			return sqlSession.selectOne("com.study.dao.LogOnDAO.exist",params);
 		}finally {
-			ResourceManage.closeRes(con, pst, pst, rs);
+			sqlSession.close();
 		}
+			
 	}
 }

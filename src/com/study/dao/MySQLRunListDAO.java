@@ -36,7 +36,7 @@ public class MySQLRunListDAO implements RunListDAO {
 	public int insert(RunListVO vo) throws Exception{
 		SqlSession sqlSession=sqlSessionFactory.openSession();
 		try {
-			int count = sqlSession.insert("com.study.dao.RunListDAO.insert");
+			int count = sqlSession.insert("com.study.dao.RunListDAO.insert",vo);
 			sqlSession.commit();
 			return count;
 		}finally {

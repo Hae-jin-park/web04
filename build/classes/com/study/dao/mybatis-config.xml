@@ -11,12 +11,13 @@
 		<environment id="development">
 			<transactionManager type="JDBC"/>
 			<dataSource type="JNDI">
-				<property name="dataSrc" value="java:comp/env/jdbc/wftm"/>
+				<property name="data_source" value="java:comp/env/jdbc/wftm"/>
 			</dataSource>
 		</environment>
 	</environments>
 	
 	<mappers>
-		<mapper resource="com/study/dao/MySqlProjectDao.xml"/>
+		<mapper resource="com/study/dao/MySqlRunListDao.xml"/>
+		<mapper resource="com/study/dao/MySqlLogonDao.xml"/>
 	</mappers>
 </configuration>

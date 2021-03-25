@@ -24,29 +24,34 @@ public class ApplicationContext {
 		objTbl.put(name, obj);
 	}
 	
-	public ApplicationContext(String propertiesPath) throws Exception{
-		Properties props = new Properties();
-		props.load(new FileReader(propertiesPath));
-		
-		prepareObj(props);
-		prepareAnnotationObjs();
-		injectDependency();
-	}
-
-	private void prepareAnnotationObjs() throws InstantiationException, IllegalAccessException {
-		// TODO Auto-generated method stub
-		Reflections reflector = new Reflections("");
+//	private void prepareAnnotationObjs() throws InstantiationException, IllegalAccessException {
+//		// TODO Auto-generated method stub
+//		Reflections reflector = new Reflections("");
+//		
+//		Set<Class<?>> list = reflector.getTypesAnnotatedWith(Component.class);
+//		String key = null;
+//		for(Class<?> clazz : list) {
+//			key = clazz.getAnnotation(Component.class).value();
+//			objTbl.put(key, clazz.newInstance());
+//		}
+//	}
+	
+	public void prepareObjectsByAnnotation(String basePkg) throws Exception{
+		Reflections reflector = new Reflections(basePkg);
 		
 		Set<Class<?>> list = reflector.getTypesAnnotatedWith(Component.class);
 		String key = null;
 		for(Class<?> clazz : list) {
 			key = clazz.getAnnotation(Component.class).value();
-			objTbl.put(key, clazz.newInstance());
+			objTbl.put(key, clazz.getDeclaredConstructor().newInstance());
 		}
 	}
 
-	private void prepareObj(Properties props) throws Exception {
+	public void prepareObjectsByProps(String propertiesPath) throws Exception {
 		// TODO Auto-generated method stub
+		Properties props = new Properties();
+		props.load(new FileReader(propertiesPath));
+		
 		Context ctx = new InitialContext();
 		String key = null;
 		String value = null;
@@ -56,12 +61,12 @@ public class ApplicationContext {
 			if(key.startsWith("jndi.")) {
 				objTbl.put(key, ctx.lookup(value));
 			}else {
-				objTbl.put(key, Class.forName(value).newInstance());
+				objTbl.put(key, Class.forName(value).getDeclaredConstructor().newInstance());
 			}
 		}
 	}
 
-	private void injectDependency() throws Exception{
+	public void injectDependency() throws Exception{
 		// TODO Auto-generated method stub
 		for(String key : objTbl.keySet()) {
 			if(!key.startsWith("jndi.")) {

@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.study.dao.RunListDAO">
-  	<resultMap type="RunListVO" id="RunListVOMap">
+  	<resultMap id="runListResultMap" type="runListVO">
   		<id property="t_no" column="t_no"/>
   		<result property="t_date" column="t_date"/>
   		<result property="car_no" column="car_no"/>
@@ -24,23 +24,22 @@
   		<result property="client_use" column="client_use"/>
   	</resultMap>
   	
-  	<select id="selectList" resultMap="RunListVOMap">
+  	<select id="selectList" resultMap="runListResultMap">
 		SELECT *
 		FROM run_list
 		ORDER BY t_no ASC
 	</select>
-	<select id="listPageV2" parameterType="com.study.util.Criteria">
+	<select id="listPageV2" parameterType="com.study.util.Criteria"  resultMap="runListResultMap">
 		SELECT *
 		FROM run_list
-		ORDER BY t_no ASC LIMIT #{page}, #{perPageNum}
+		ORDER BY t_no ASC LIMIT #{pageStart}, #{perPageNum}
 	</select>
-  	<select id="selectOne" parameterType="int" resultMap="RunListVOMap">
+  	<select id="selectOne" parameterType="int"  resultMap="runListResultMap">
 		SELECT *
-		FROM run_list
-		ORDER BY t_no ASC WHERE t_no=#{t_no}
+		FROM run_list WHERE t_no=#{t_no}
 	</select>
 	
-	<select id="listTotalCount">
+	<select id="listTotalCount" resultType="int">
 		SELECT count(t_no) FROM run_list
 	</select>
 	
