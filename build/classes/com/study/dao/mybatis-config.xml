@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.study.vo.RunListVO" alias="runListVO"/>
+		<typeAlias type="com.study.vo.CarVO" alias="carVO"/>
+		<typeAlias type="com.study.vo.ClientVO" alias="clientVO"/>
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="JNDI">
+				<property name="dataSrc" value="java:comp/env/jdbc/wftm"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+		<mapper resource="com/study/dao/MySqlProjectDao.xml"/>
+	</mappers>
+</configuration>

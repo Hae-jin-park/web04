@@ -29,7 +29,7 @@ public class RunListShowController implements Controller {
 		if(session.getAttribute("member")==null) {
 			return "redirect:../authentication/logon.do";
 		}else {
-			model.put("runlist", runDAO.listPageByCrit(crit));
+			model.put("runlist", runDAO.listPageV2(crit));
 			model.put("auth_level", logonMember.getAuthority());
 			return "/Run/list.jsp";
 		}

@@ -28,7 +28,7 @@ public class RunListShowV2Controller implements Controller, DataBinding {
 		}else {
 			pageMaker.setCri(crit);
 			pageMaker.setTotalCount(runDAO.listTotalCount());
-			model.put("runlist", runDAO.listPageByCrit(crit));
+			model.put("runlist", runDAO.listPageV2(crit));
 			model.put("auth_level", logonMember.getAuthority());
 			model.put("pageMaker", pageMaker);
 			return "/Run/listV2.jsp";

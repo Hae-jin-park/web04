@@ -20,6 +20,10 @@ public class ApplicationContext {
 		return objTbl.get(key);
 	}
 	
+	public void addBean(String name, Object obj) {
+		objTbl.put(name, obj);
+	}
+	
 	public ApplicationContext(String propertiesPath) throws Exception{
 		Properties props = new Properties();
 		props.load(new FileReader(propertiesPath));

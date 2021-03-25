@@ -53,7 +53,7 @@ public class RunListUpdateController implements Controller, DataBinding {
 			}else {
 				if(isInternal && logonMember.getAuthority().equals("ADMIN")) {
 					runVO = (RunListVO) model.get("runVO");
-					runDAO.update(runVO,(Integer) model.get("t_no"));
+					runDAO.update(runVO);
 					//model.put("isPost", false);
 					return "redirect:listV2.do";
 				}else {
