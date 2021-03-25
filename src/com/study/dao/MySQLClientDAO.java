@@ -28,7 +28,6 @@ public class MySQLClientDAO implements ClientDAO {
 			con = ds.getConnection();
 			st = con.createStatement();
 			rs = st.executeQuery("SELECT * FROM clients ORDER BY client_code ASC");
-			System.out.println("결과 column의 수 " + rs.getMetaData().getColumnCount());
 			List<ClientVO> client_list = new ArrayList<ClientVO>();
 			while(rs.next()) {
 				client_list.add(new ClientVO().setClient_code(rs.getInt("client_code"))
@@ -36,7 +35,6 @@ public class MySQLClientDAO implements ClientDAO {
 						.setClient_detail(rs.getString("client_detail"))
 						.setClient_use(rs.getInt("client_use")));
 			}
-			System.out.println("결과 튜플 수 : "+client_list.size());
 			return client_list;
 		}catch(Exception e) {
 			throw e;

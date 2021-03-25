@@ -54,10 +54,33 @@
 		VALUES(#{t_date},#{car_no},#{car_div},#{t_from},#{t_to},#{fee},#{bill},#{measure_fee},#{commission},#{detail},#{client_code})
 	</insert>
 	
-  	<update id="update" parameterType="runListVO">
+  	<update id="update" parameterType="map">
 		UPDATE run_list
-		SET t_date = #{t_date},	car_no = #{car_no}, car_div=#{car_div}, t_from = #{t_from},
-		t_to = #{t_to},	fee = #{fee}, bill = #{bill}, measure_fee = #{measure_fee}, commission = #{commission},	detail = #{detail},  client_code = #{client_code}
+		<!-- SET t_date = #{t_date},
+			car_no = #{car_no},
+			car_div=#{car_div},
+			t_from = #{t_from},
+			t_to = #{t_to},
+			fee = #{fee},
+			bill = #{bill},
+			measure_fee = #{measure_fee},
+			commission = #{commission},
+			detail = #{detail},
+			client_code = #{client_code}
+		WHERE t_no = #{t_no} -->
+		<set>
+			<if test="t_date != null">t_date=#{t_date}</if>
+			<if test="car_no != null">car_no=#{car_no}</if>
+			<if test="car_div != null">car_div=#{car_div}</if>
+			<if test="t_from != null">t_from=#{t_from}</if>
+			<if test="t_to != null">t_to=#{t_to}</if>
+			<if test="fee != null">fee=#{fee}</if>
+			<if test="bill != null">bill=#{bill}</if>
+			<if test="measure_fee != null">measure_fee=#{measure_fee}</if>
+			<if test="commission != null">commission=#{commission}</if>
+			<if test="detail != null">detail=#{detail}</if>
+			<if test="client_code != null">client_code=#{client_code}</if>
+		</set>
 		WHERE t_no = #{t_no}
 	</update>
 	

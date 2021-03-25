@@ -63,6 +63,10 @@
 										</div>
 										<script>
 											$(document).ready(function(){
+												$("#myCar").show();
+												$("#myCar select").attr("disabled",false);
+												$("#extCar").hide();
+												$("#extCar input").attr("disabled",true);
 												$("select[name=car_div]").change(function(){
 													if($(this).val()=="자차"){
 														$("#myCar").show();
