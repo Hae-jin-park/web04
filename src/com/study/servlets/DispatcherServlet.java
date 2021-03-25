@@ -36,30 +36,29 @@ public class DispatcherServlet extends HttpServlet {
 				ApplicationContext actx = ContextLoaderListener.getApplicationContext();//ServletContext sctx = this.getServletContext();
 				HashMap<String, Object> model = new HashMap<String,Object>();
 				Criteria crit = new Criteria();
-				//System.out.println("strReferer : " + strReferer);
 				model.put("session",request.getSession());
 				model.put("isInternal",isInternal);
 				model.put("strReferer", strReferer);
-				//System.out.println("page : "+request.getAttribute("page"));
+				
 				if(request.getParameter("page")!=null) {
 					crit.setPage(Integer.parseInt(request.getParameter("page")));
 				}
+				
 				if(request.getParameter("perPageNum")!=null) {
 					crit.setPerPageNum(Integer.parseInt(request.getParameter("perPageNum")));
 				}
+				
 				if(request.getParameter("t_no")!=null) {
 					model.put("t_no",Integer.parseInt(request.getParameter("t_no")));
 				}
+				
 				model.put("crit", crit);
-				/*
-				 * if(request.getParameter("isPost")==null) { model.put("isPost",false); }
-				 */
-				//String pageControllerPath = null;
-				//Controller pageController = (Controller) sctx.getAttribute(servletPath);
 				Controller pageController = (Controller) actx.getBean(servletPath);
+				
 				if(pageController == null) {
 					throw new Exception("요청 서비스를 찾을 수 없어요...");
 				}
+				
 				if(pageController instanceof DataBinding) {
 					prepareRequestData(request,model,(DataBinding) pageController);
 				}
@@ -69,10 +68,9 @@ public class DispatcherServlet extends HttpServlet {
 				for(String key : model.keySet()) {
 					request.setAttribute(key, model.get(key));
 				}
-				//System.out.println(viewUrl);
+				
 				if(viewUrl.startsWith("redirect:")) {
 					response.sendRedirect(viewUrl.substring(9));
-					//model.put("crit", crit);
 					return;
 				}else {
 					RequestDispatcher rd=request.getRequestDispatcher(viewUrl);

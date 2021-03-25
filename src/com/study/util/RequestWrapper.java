@@ -36,16 +36,10 @@ public class RequestWrapper extends HttpServletRequestWrapper {
 	
 	private String antiXSS(String value) {  //실질적 XSS 필터링 작업 : 만약에 추가하고자 할 때는 replace 조건 분석하고 추가만 하면 됨. 
 		// TODO Auto-generated method stub
-		value = value.replaceAll("<", "& lt;").replaceAll(">", "& gt;");         
-		  
-		  //value = value.replaceAll("\\(", "& #40;").replaceAll("\\)", "& #41;");         
-		  
+		  value = value.replaceAll("<", "& lt;").replaceAll(">", "& gt;");         
 		  value = value.replaceAll("'", "& #39;");        
-		  
 		  value = value.replaceAll("eval\\((.*)\\)", "");         
-		  
 		  value = value.replaceAll("[\\\"\\\'][\\s]*javascript:(.*)[\\\"\\\']", "\"\"");         
-		  
 		  value = value.replaceAll("script", "");         
 		  
 		  return value;    

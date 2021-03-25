@@ -29,10 +29,16 @@
 		FROM run_list
 		ORDER BY t_no ASC
 	</select>
-	<select id="listPageV2" parameterType="com.study.util.Criteria"  resultMap="runListResultMap">
+	<select id="listPageV2" parameterType="map"  resultMap="runListResultMap">
 		SELECT *
 		FROM run_list
-		ORDER BY t_no ASC LIMIT #{pageStart}, #{perPageNum}
+		LIMIT #{pageStart}, #{perPageNum}
+		ORDER BY
+		<choose>
+			<when test="orderByCond == 'TDATE_ASC'">t_date ASC</when>
+			<when test="orderByCond == 'TDATE_DESC'">t_date DESC</when>
+			<otherwise>t_date ASC</otherwise>
+		</choose>
 	</select>
   	<select id="selectOne" parameterType="int"  resultMap="runListResultMap">
 		SELECT *
