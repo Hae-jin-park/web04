@@ -92,23 +92,23 @@ for(RunListVO vo : runlist){
 <thead>
 <tr>
 	<th><c:choose>
-			<c:when test="${orderByCond eq 'TDATE_ASC' }">
-				<a href="listV2.do?orderByCond=TDATE_DESC">일자↑</a>
+			<c:when test="${orderByCond eq 'TDATE_ASC'  || orderByCond eq null}">
+				<p class="fa fa-sort-amount-asc"><a href="listV2.do?orderByCond=TDATE_DESC">일자</a></p>
 			</c:when>
 			<c:when test="${orderByCond eq 'TDATE_DESC' }">
-				<a href="listV2.do?orderByCond=TDATE_ASC">일자↓</a>
+				<p class="fa fa-sort-amount-desc"><a href="listV2.do?orderByCond=TDATE_ASC">일자</a></p>
 			</c:when>
 			<c:otherwise>
 				<a href="listV2.do?orderByCond=TDATE_ASC">일자</a>
 			</c:otherwise>
 		</c:choose></th>
-	<th>차번</th>
-	<th>상차지</th>
-	<th>하역지</th>
-	<th>운송료</th>
-	<th>거래처청구</th>
-	<th>상세조회</th>
-	<th>삭제?</th>
+	<th><p>차번</p></th>
+	<th><p>상차지</p></th>
+	<th><p>하역지</p></th>
+	<th><p>운송료</p></th>
+	<th><p>거래처청구</p></th>
+	<th><p>상세조회</p></th>
+	<th><p>삭제?</p></th>
 </tr>
 <tbody>
 <c:forEach var="runlist" items="${runlist }">

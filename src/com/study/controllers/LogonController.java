@@ -24,7 +24,7 @@ public class LogonController implements Controller, DataBinding {
 		// TODO Auto-generated method stub
 		
 		if(model.get("id")!=null) {
-			MemberVO vo = logonDAO.exist((String) model.get("id"), (String) model.get("password"));
+			MemberVO vo = logonDAO.exist((String) model.get("id"), (String) model.get("password"),(String) model.get("isLogonForm"));
 			if(vo!=null) {
 				HttpSession session = (HttpSession)model.get("session");
 				session.setAttribute("member", vo);

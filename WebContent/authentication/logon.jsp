@@ -40,6 +40,7 @@ $(document).ready(function(){
                     </div>
                     <div class="panel-body">
                         <form id="logonForm" action="logon.do" method="get">
+                        <input type="hidden" name="isLogonForm" value="YES">
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="id" name="id" type="text">

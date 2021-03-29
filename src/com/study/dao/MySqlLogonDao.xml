@@ -12,10 +12,39 @@
 		<result column="password"	property="password"/>
 		<result column="email"		property="email"/>
 		<result column="authority"	property="authority"/>
+		<result column="cre_date"	property="cre_date"/>
+		<result column="mod_date"	property="mod_date"/>
 	</resultMap>
+	
+	<select id="showAllMember" resultMap="memberResultMap">
+		SELECT id, name, email, authority, cre_date
+		FROM member
+	</select>
 	
 	<select id="exist" parameterType="hashmap" resultMap="memberResultMap">
 		SELECT * FROM member
-		WHERE id=#{id} AND password=#{password}
+		WHERE id=#{id}
+		<choose>
+			<when test="isLogonForm == 'YES'">
+				AND password = #{password}
+			</when>
+		</choose>
 	</select>
+	
+	<update id="update" parameterType="hashmap">
+		UPDATE member
+		<set>
+			<if test="name != null">name=#{name}</if>
+			<if test="password != passworrd">password=#{password}</if>
+			<if test="email != null">email=#{email}</if>
+			<if test="authority != null">authority=#{authority}</if>
+			mod_date = now()
+		</set>
+		WHERE id=#{id}
+	</update>
+	
+	<insert id="signIn" parameterType="com.study.vo.MemberVO">
+		INSERT INTO member (id, name, password, email, authority, cre_date, mod_date)
+		VALUES (#{id}, #{name}, #{password}, #{email}, 'USER', now(), now())
+	</insert>
 </mapper>

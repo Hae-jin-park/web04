@@ -56,6 +56,10 @@ public class DispatcherServlet extends HttpServlet {
 					model.put("t_no",Integer.parseInt(request.getParameter("t_no")));
 				}
 				
+				if(request.getParameter("isLogonForm")!=null) {
+					model.put("isLogonForm",request.getParameter("isLogonForm"));
+				}
+				
 				model.put("crit", crit);
 				Controller pageController = (Controller) actx.getBean(servletPath);
 				
