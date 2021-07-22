@@ -64,7 +64,7 @@ for(RunListVO vo : runlist){
                     	</c:when>
                         
                         <c:when test="${isInternal eq true}">
-                        <a class="btn btn-primary" href='insert.do'><span class="fa fa-plus-circle"> 운송일보 등록</span></a>
+                        
                         <div class="panel panel-warning">
 	                        <div class="panel-heading">
 	                        	읽기 전용 모드

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.study.dao.CompDAO">
+  	<resultMap id="compListResultMap" type="compVO">
+  		<id property="comp_no" column="comp_no"/>
+  		<result property="comp_name" column="comp_name"/>
+  		<result property="comp_addr" column="comp_addr"/>
+  	</resultMap>
+  	
+  	<select id="selectList" resultMap="compListResultMap">
+		SELECT *
+		FROM assigned_comp;
+	</select>
+  	<select id="selectOne" parameterType="int"  resultMap="compListResultMap">
+		SELECT *
+		FROM run_list WHERE comp_no=#{comp_no}
+	</select>
+	
+	<insert id="insert" parameterType="compVO">
+		INSERT INTO assigned_comp (comp_name, comp_addr)
+		VALUES(#{comp_name},#{comp_addr});
+	</insert>
+	
+  	<update id="update" parameterType="map">
+		UPDATE assigned_comp
+		<!-- SET t_date = #{t_date},
+			car_no = #{car_no},
+			car_div=#{car_div},
+			t_from = #{t_from},
+			t_to = #{t_to},
+			fee = #{fee},
+			bill = #{bill},
+			measure_fee = #{measure_fee},
+			commission = #{commission},
+			detail = #{detail},
+			client_code = #{client_code}
+		WHERE t_no = #{t_no} -->
+		<set>
+			<if test="comp_name != null">comp_name=#{comp_name}</if>
+			<if test="comp_addr != null">comp_addr=#{comp_addr}</if>
+		</set>
+		comp_no=#{comp_no}
+	</update>
+	
+	<delete id="delete" parameterType="string">
+		DELETE FROM assigned_comp WHERE comp_no=#{comp_no}
+	</delete>
+  </mapper>

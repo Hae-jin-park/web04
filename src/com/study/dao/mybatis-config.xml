@@ -9,6 +9,9 @@
 		<typeAlias type="com.study.vo.RunListVO" alias="runListVO"/>
 		<typeAlias type="com.study.vo.CarVO" alias="carVO"/>
 		<typeAlias type="com.study.vo.ClientVO" alias="clientVO"/>
+		<typeAlias type="com.study.vo.CompVO" alias="compVO"/>
+		<typeAlias type="com.study.vo.OilVO" alias="oilVO"/>
+		
 	</typeAliases>
 	
 	<environments default="development">
@@ -23,5 +26,7 @@
 	<mappers>
 		<mapper resource="com/study/dao/MySqlRunListDao.xml"/>
 		<mapper resource="com/study/dao/MySqlLogonDao.xml"/>
+		<mapper resource="com/study/dao/MySQLCompDao.xml"/>
+		<mapper resource="com/study/dao/MySQLOilDao.xml"/>
 	</mappers>
 </configuration>

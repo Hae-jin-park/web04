@@ -42,25 +42,33 @@ public class RunListInsertController implements Controller, DataBinding {
 	@Override
 	public String exec(Map<String, Object> model) throws Exception {
 		// TODO Auto-generated method stub
+		
+		//접근제어부분
 		HttpSession session = (HttpSession) model.get("session");
 		boolean isInternal = (Boolean)model.get("isInternal");
+		String abnormalAcc = (String) model.get("strReferer");
+		
+		//본격적인 비즈니스 로직 부분
 		RunListVO runVO = (RunListVO) model.get("runVO");
 		if(session.getAttribute("member")==null) {
 			return "redirect:../authentication/logon.do";
 		}else {
 			String isNull = runVO.getT_date();
-
-			if(isInternal) {
-				if(isNull==null) {
-					model.put("client_list", clientDAO.selectList());
-					model.put("car_list", carDAO.selectList());
-					return "/Run/insert.jsp";
-				}else {
-					runDAO.insert(runVO);
-					return "redirect:listV2.do";
+			if(abnormalAcc==null) {
+				return "../abnormalAccess.jsp";
+			}else {
+				if(isInternal) {
+					if(isNull==null) {
+						model.put("client_list", clientDAO.selectList());
+						model.put("car_list", carDAO.selectList());
+						return "/Run/insert.jsp";
+					}else {
+						runDAO.insert(runVO);
+						return "redirect:listV2.do";
+					}
+				}else { //외부접속이면? 접근거부
+					return "/authentication/denied.jsp";
 				}
-			}else { //외부접속이면? 접근거부
-				return "/authentication/denied.jsp";
 			}
 		}
 	}

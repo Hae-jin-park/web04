@@ -246,47 +246,45 @@ ${sessionScope.member.name }
                     <ul class="nav in" id="side-menu">
                         
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i>근본데이터 입력<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
                                 <li>
-                                    <a href="flot.html">Flot Charts</a>
+                                    <a href="../Run/listV2.do">매출데이터</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Morris.js Charts</a>
+                                    <a href="../Fee/oilInsert.do">경비데이터</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
-                        </li>
-                        <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                        </li>
                         <li class="">
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>매출 관리<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
                                 <li>
-                                    <a href="panels-wells.html">Panels and Wells</a>
+                                    <a href="panels-wells.html">일일 매출</a>
                                 </li>
                                 <li>
-                                    <a href="buttons.html">Buttons</a>
+                                    <a href="buttons.html">단발거래처 계산서관리</a>
                                 </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li class="">
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i>경비(기름값/수리비) 관리<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
                                 <li>
-                                    <a href="notifications.html">Notifications</a>
+                                    <a href="panels-wells.html">주유내역</a>
                                 </li>
-                                <li>
-                                    <a href="typography.html">Typography</a>
-                                </li>
-                                <li>
-                                    <a href="icons.html"> Icons</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grid</a>
-                                </li>
+                                <li class="">
+                                    <a href="#">차량정비관리<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level collapse" aria-expanded="false" style="height: 0px;">
+                                        <li>
+                                            <a href="#">엔진오일</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">정기검사</a>
+                                        </li>
+                                    </ul>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

@@ -30,7 +30,7 @@ public class DispatcherServlet extends HttpServlet {
 	//	super.service(arg0, arg1);
 		response.setContentType("text/html; charset=UTF-8");
 		String servletPath = request.getServletPath();
-		String strReferer = request.getHeader("referer");
+		String strReferer = request.getHeader("referer");    //주소창에 입력해서 접근하면 null.
 		boolean isInternal = AccessControl.isInternalAccess(request);
 			try{
 				ApplicationContext actx = ContextLoaderListener.getApplicationContext();//ServletContext sctx = this.getServletContext();

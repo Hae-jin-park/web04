@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.study.dao.OilDAO">
+  	<resultMap id="oilListResultMap" type="oilVO">
+  		<id property="oil_no" column="oil_no"/>
+  		<result property="oil_date" column="oil_date"/>
+  		<result property="car_no" column="car_no"/>
+  		<result property="compForVAT" column="compForVAT"/>
+  		<result property="oil_station" column="oil_station"/>
+  		<result property="oil_liter" column="oil_liter"/>
+  		<result property="oil_fee" column="oil_fee"/>
+  	</resultMap>
+  	
+  	<select id="selectList" resultMap="oilListResultMap">
+		SELECT *
+		FROM oil_fee_tbl;
+	</select>
+  	<select id="selectOne" parameterType="int"  resultMap="oilListResultMap">
+		SELECT *
+		FROM oil_fee_tbl WHERE oil_no=#{oil_no}
+	</select>
+	
+	<insert id="insert" parameterType="oilVO">
+		INSERT INTO oil_fee_tbl (oil_date, car_no, compForVAT, oil_station, oil_liter, oil_fee)
+		VALUES(#{oil_date},#{car_no},#{compForVAT},#{oil_station},#{oil_liter},#{oil_fee})
+	</insert>
+	
+  	<update id="update" parameterType="map">
+		UPDATE oil_fee_tbl
+		<set>
+			<if test="oil_date != null">oil_date=#{oil_date}</if>
+			<if test="car_no != null">car_no=#{car_no}</if>
+			<if test="compForVAT != null">compForVAT=#{compForVAT}</if>
+			<if test="oil_station != null">oil_station=#{oil_station}</if>
+			<if test="oil_liter != null">oil_liter=#{oil_liter}</if>
+			<if test="oil_fee != null">oil_fee=#{oil_fee}</if>
+		</set>
+		oil_no=#{oil_no}
+	</update>
+	
+	<delete id="delete" parameterType="string">
+		DELETE FROM oil_fee_tbl WHERE oil_no=#{oil_no}
+	</delete>
+  </mapper>
