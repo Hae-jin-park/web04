@@ -19,13 +19,14 @@
                 <div class="row">
                     <div class="col-lg-12">
 <h1 class="page-header">주유내역 입력</h1>
-	<form action='oilInsert.do' method='post' autocomplete="off" >
+	<form action='oilUpdate.do' method='post' autocomplete="off" >
 		<div class="box-header with-border">
+		<input type="hidden" readonly="readonly" value='${oilVO.oil_no }' name="oil_no">
 										<div class="col-sm-12 form-group" id="oil_date">
 											<label>주유 일자</label>
-											<input type="text" name="oil_date" id="datepicker" class="form-control"/>
+											<input type="text" name="oil_date" id="datepicker" class="form-control" value="${oilVO.oil_date } "/>
 										</div>
-										<script>
+	<script>
         $(function() {
             //input을 datepicker로 선언
             $("#datepicker").datepicker({
@@ -47,43 +48,56 @@
             });                    
             
             //초기값을 오늘 날짜로 설정
-            $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
+            $('#datepicker').datepicker('setDate', '${oilVO.oil_date }'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
         	
-
             $("#getPrimaryStn").on("click",function(event){
             	$("#oil_stn").attr("value","${getPrimaryStn}");
             });
         });
     </script>
-									<div class="col-sm-12 form-group">
+										<div class="col-sm-12 form-group">
 										<label>차량번호</label>
 											<select name="car_no" class="form-control">
 												<c:forEach items="${car_list}" var="carVO">
-													<option value="${carVO.car_no}">${carVO.car_fullNo}</option>
+													<c:choose>
+														<c:when test="${carVO.car_no eq oilVO.car_no}">
+															<option value="${carVO.car_no}" selected="selected">${carVO.car_fullNo}</option>
+														</c:when>
+														<c:otherwise>
+															<option value="${carVO.car_no}">${carVO.car_fullNo}</option>
+														</c:otherwise>
+													</c:choose>
 												</c:forEach>
 											</select>
-									</div>
-									<div class="col-sm-12 form-group">
-										<label>VAT신고를 위한 사업자</label>
-										<select name="compForVAT" class="form-control">
-											<c:forEach items="${comp_list}" var="ass_comp">
-												<option value="${ass_comp.comp_name}">${ass_comp.comp_no} (${ass_comp.comp_name })</option>
-											</c:forEach>
-										</select>
-									</div>
+										</div>
+										<div class="col-sm-12 form-group">
+											<label>VAT신고를 위한 사업자</label>
+											<select name="compForVAT" class="form-control">
+												<c:forEach items="${comp_list}" var="ass_comp">
+													<c:choose>
+														<c:when test="${ass_comp.comp_name eq oilVO.compForVAT}">
+															<option value="${ass_comp.comp_name}" selected="selected">${ass_comp.comp_no} (${ass_comp.comp_name })</option>
+														</c:when>
+														<c:otherwise>
+															<option value="${ass_comp.comp_name}">${ass_comp.comp_no} (${ass_comp.comp_name })</option>
+														</c:otherwise>
+													</c:choose>
+												</c:forEach>
+											</select>
+										</div>
 									<div class="col-sm-12 form-group">
 										<label>주유소</label>
-										<input type="text" name="oil_station" id="oil_stn" class="form-control"/>
+										<input type="text" name="oil_station" id="oil_stn" class="form-control" value="${oilVO.oil_station }"/>
 										<button type="button" class="btn btn-info" id="getPrimaryStn">지정주유소 자동입력</button>
 									</div>
 									<div class="col-sm-6 form-group">
 										<label>주유량</label>
-										<input type="text" name="oil_liter" class="form-control"/>
+										<input type="text" name="oil_liter" class="form-control" value="${oilVO.oil_liter }"/>
 									</div>
 									<div class="col-sm-6 form-group">
 										<label>주유금액</label>
-										<input type="text" name="oil_fee" class="form-control"/>
-									</div>
+										<input type="text" name="oil_fee" class="form-control" value="${oilVO.oil_fee }"/>
+						</div>
 			</div>
 						<button type="submit" class="btn btn-info" id="addBtn">등록</button>
 						<button type="button" class="btn btn-danger" onclick="location.href='oil_list.do'">취소</button>

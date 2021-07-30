@@ -17,12 +17,6 @@
   		<result property="detail" column="detail"/>
   		<result property="client_code" column="client_code"/>
   	</resultMap>
-  	<resultMap type="ClientVO" id="Clients">
-  		<id property="client_code" column="client_code"/>
-  		<result property="client_name" column="client_name"/>
-  		<result property="client_detail" column="client_detail"/>
-  		<result property="client_use" column="client_use"/>
-  	</resultMap>
   	
   	<select id="selectList" resultMap="runListResultMap">
 		SELECT *

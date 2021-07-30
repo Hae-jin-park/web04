@@ -62,6 +62,7 @@ public class OilInsertController implements Controller, DataBinding {
 				if(isNull==null) {
 					model.put("car_list", carDAO.selectList());
 					model.put("comp_list", compDAO.selectList());
+					model.put("getPrimaryStn", oilDAO.getPrimaryOilStn());
 					return "../Fee/oil_insert.jsp";
 				}else {
 					oilDAO.insert(oilVO);

@@ -55,6 +55,10 @@ public class DispatcherServlet extends HttpServlet {
 				if(request.getParameter("t_no")!=null) {
 					model.put("t_no",Integer.parseInt(request.getParameter("t_no")));
 				}
+
+				if(request.getParameter("oil_no")!=null) {
+					model.put("oil_no",Integer.parseInt(request.getParameter("oil_no")));
+				}
 				
 				if(request.getParameter("isLogonForm")!=null) {
 					model.put("isLogonForm",request.getParameter("isLogonForm"));

@@ -67,8 +67,7 @@ public class RunListUpdateController implements Controller, DataBinding {
 		// TODO Auto-generated method stub
 		return new Object[] {
 				"t_no", Integer.class,
-				"runVO", com.study.vo.RunListVO.class,
-				"isPost", Boolean.class
+				"runVO", com.study.vo.RunListVO.class
 		};
 	}
 

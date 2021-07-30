@@ -252,7 +252,7 @@ ${sessionScope.member.name }
                                     <a href="../Run/listV2.do">매출데이터</a>
                                 </li>
                                 <li>
-                                    <a href="../Fee/oilInsert.do">경비데이터</a>
+                                    <a href="../Fee/oil_list.do">경비데이터</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

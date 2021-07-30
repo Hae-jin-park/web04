@@ -1,5 +1,6 @@
 package com.study.dao;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import org.apache.ibatis.session.SqlSession;
@@ -42,11 +43,11 @@ public class MySQLOilDAO implements OilDAO {
 	}
 
 	@Override
-	public int delete(String comp_no) throws Exception {
+	public int delete(int oil_no) throws Exception {
 		// TODO Auto-generated method stub
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			int result = sqlSession.delete("com.study.dao.OilDAO.delete",comp_no);
+			int result = sqlSession.delete("com.study.dao.OilDAO.delete",oil_no);
 			sqlSession.commit();
 			return result;
 		}finally {
@@ -66,19 +67,19 @@ public class MySQLOilDAO implements OilDAO {
 				paramMap.put("oil_date", vo.getOil_date());
 			}
 			if(!vo.getCar_no().equals(origin.getCar_no())) {
-				paramMap.put("oil_date", vo.getCar_no());
+				paramMap.put("car_no", vo.getCar_no());
 			}
 			if(!vo.getCompForVAT().equals(origin.getCompForVAT())) {
-				paramMap.put("oil_date", vo.getCompForVAT());
+				paramMap.put("compForVAT", vo.getCompForVAT());
 			}
 			if(!vo.getOil_station().equals(origin.getOil_station())) {
-				paramMap.put("oil_date", vo.getOil_station());
+				paramMap.put("oil_station", vo.getOil_station());
 			}
 			if(!(vo.getOil_liter()==origin.getOil_liter())) {
-				paramMap.put("oil_date", vo.getOil_liter());
+				paramMap.put("oil_liter", vo.getOil_liter());
 			}
 			if(!(vo.getOil_fee()==origin.getOil_fee())) {
-				paramMap.put("oil_date", vo.getOil_fee());
+				paramMap.put("oil_fee", vo.getOil_fee());
 			}
 			
 			if(paramMap.size()>0) {
@@ -95,11 +96,43 @@ public class MySQLOilDAO implements OilDAO {
 	}
 
 	@Override
-	public CarVO selectOne(int oil_no) throws Exception {
+	public OilVO selectOne(int oil_no) throws Exception {
 		// TODO Auto-generated method stub
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			return sqlSession.selectOne("com.study.dao.OilDAO.delete",oil_no);
+			return sqlSession.selectOne("com.study.dao.OilDAO.selectOne",oil_no);
+		}finally {
+			sqlSession.close();
+		}
+	}
+
+	@Override
+	public int getCount() throws Exception {
+		// TODO Auto-generated method stub
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			return sqlSession.selectOne("com.study.dao.OilDAO.getCount");
+		}finally {
+			sqlSession.close();
+		}
+	}
+
+	@Override
+	public List<OilVO> selectListV2(Map<String, Object> paramMap) throws Exception {
+		// TODO Auto-generated method stub
+		SqlSession sqlSession=sqlSessionFactory.openSession();
+		try {
+			return sqlSession.selectList("com.study.dao.OilDAO.selectListV2",paramMap);
+		}finally {
+			sqlSession.close();
+		}
+	}
+	
+	@Override
+	public String getPrimaryOilStn() throws Exception{
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			return sqlSession.selectOne("com.study.dao.OilDAO.getPrimaryOilStn");
 		}finally {
 			sqlSession.close();
 		}

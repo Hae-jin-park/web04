@@ -17,6 +17,19 @@
 		SELECT *
 		FROM oil_fee_tbl;
 	</select>
+	
+	<select id="selectListV2" parameterType="map"  resultMap="oilListResultMap">
+		SELECT *
+		FROM oil_fee_tbl
+		ORDER BY
+		<choose>
+			<when test="orderByCond == 'TDATE_ASC'">oil_date ASC</when>
+			<when test="orderByCond == 'TDATE_DESC'">oil_date DESC</when>
+			<otherwise>oil_date ASC</otherwise>
+		</choose>
+		LIMIT #{crit.pageStart}, #{crit.perPageNum}
+	</select>
+	
   	<select id="selectOne" parameterType="int"  resultMap="oilListResultMap">
 		SELECT *
 		FROM oil_fee_tbl WHERE oil_no=#{oil_no}
@@ -37,10 +50,19 @@
 			<if test="oil_liter != null">oil_liter=#{oil_liter}</if>
 			<if test="oil_fee != null">oil_fee=#{oil_fee}</if>
 		</set>
-		oil_no=#{oil_no}
+		WHERE oil_no=#{oil_no}
 	</update>
 	
-	<delete id="delete" parameterType="string">
+	<delete id="delete" parameterType="int">
 		DELETE FROM oil_fee_tbl WHERE oil_no=#{oil_no}
 	</delete>
+	
+	<select id="getCount" resultType="int">
+		SELECT count(*)
+		FROM oil_fee_tbl;
+	</select>
+	
+	<select id="getPrimaryOilStn" resultType="string">
+		SELECT stn_name FROM favorite_oil_station WHERE is_primary = 1;
+	</select>
   </mapper>
